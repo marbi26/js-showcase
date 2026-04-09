@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kanban Board</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="container">
+
+    <header>
+      <a href="../../index.html" class="back">← Back to Showcase</a>
+      <div class="header-row">
+        <h1>📋 Kanban Board</h1>
+        <button class="clear-btn" onclick="clearAll()">Clear All</button>
+      </div>
+    </header>
+
+    <div class="board" id="board">
+
+      <!-- To Do -->
+      <div class="column" id="col-todo" ondragover="onDragOver(event)" ondrop="onDrop(event, 'todo')">
+        <div class="col-header">
+          <div class="col-title">
+            <span class="dot todo-dot"></span>
+            <h2>To Do</h2>
+            <span class="badge" id="badge-todo">0</span>
+          </div>
+          <button class="add-btn" onclick="openModal('todo')">＋</button>
+        </div>
+        <ul class="task-list" id="list-todo"></ul>
+      </div>
+
+      <!-- In Progress -->
+      <div class="column" id="col-inprogress" ondragover="onDragOver(event)" ondrop="onDrop(event, 'inprogress')">
+        <div class="col-header">
+          <div class="col-title">
+            <span class="dot inprogress-dot"></span>
+            <h2>In Progress</h2>
+            <span class="badge" id="badge-inprogress">0</span>
+          </div>
+          <button class="add-btn" onclick="openModal('inprogress')">＋</button>
+        </div>
+        <ul class="task-list" id="list-inprogress"></ul>
+      </div>
+
+      <!-- Done -->
+      <div class="column" id="col-done" ondragover="onDragOver(event)" ondrop="onDrop(event, 'done')">
+        <div class="col-header">
+          <div class="col-title">
+            <span class="dot done-dot"></span>
+            <h2>Done</h2>
+            <span class="badge" id="badge-done">0</span>
+          </div>
+          <button class="add-btn" onclick="openModal('done')">＋</button>
+        </div>
+        <ul class="task-list" id="list-done"></ul>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Add Task Modal -->
+  <div class="modal-overlay hidden" id="modal-overlay" onclick="closeModal()">
+    <div class="modal" onclick="event.stopPropagation()">
+      <h3 id="modal-title">Add Task</h3>
+      <input type="text" id="task-input" placeholder="What needs to be done?" maxlength="120" />
+      <div class="modal-tags">
+        <span class="tag-label">Priority:</span>
+        <button class="tag-btn active" id="tag-low"    onclick="setTag('low')">🟢 Low</button>
+        <button class="tag-btn"        id="tag-medium" onclick="setTag('medium')">🟡 Medium</button>
+        <button class="tag-btn"        id="tag-high"   onclick="setTag('high')">🔴 High</button>
+      </div>
+      <div class="modal-actions">
+        <button class="cancel-btn" onclick="closeModal()">Cancel</button>
+        <button class="confirm-btn" onclick="addTask()">Add Task</button>
+      </div>
+      <p class="modal-error hidden" id="modal-error">Please enter a task name.</p>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
