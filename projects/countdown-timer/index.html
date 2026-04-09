@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Countdown Timer</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <a href="../../index.html" class="back">← Back to Showcase</a>
+      <h1>⏳ Countdown Timer</h1>
+    </header>
+
+    <!-- Setup Screen -->
+    <div id="setup-screen">
+      <div class="card">
+        <h2>Set a Countdown</h2>
+        <div class="form-group">
+          <label>Event Name</label>
+          <input type="text" id="event-name" placeholder="e.g. My Exam, Trip to Goa..." maxlength="60" />
+        </div>
+        <div class="form-group">
+          <label>Target Date & Time</label>
+          <input type="datetime-local" id="target-date" />
+        </div>
+        <button class="btn" onclick="startCountdown()">Start Countdown</button>
+        <p class="error hidden" id="setup-error"></p>
+      </div>
+
+      <div class="presets">
+        <p>Quick presets:</p>
+        <div class="preset-row">
+          <button class="preset-btn" onclick="setPreset(1,  'Tomorrow')">Tomorrow</button>
+          <button class="preset-btn" onclick="setPreset(7,  'Next Week')">Next Week</button>
+          <button class="preset-btn" onclick="setPreset(30, 'Next Month')">Next Month</button>
+          <button class="preset-btn" onclick="setPreset(100,'100 Days')">100 Days</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Countdown Screen -->
+    <div id="countdown-screen" class="hidden">
+      <div class="card countdown-card">
+        <p class="event-label" id="display-name"></p>
+
+        <div class="units" id="units">
+          <div class="unit">
+            <span class="unit-value" id="days">00</span>
+            <span class="unit-label">Days</span>
+          </div>
+          <div class="unit-sep">:</div>
+          <div class="unit">
+            <span class="unit-value" id="hours">00</span>
+            <span class="unit-label">Hours</span>
+          </div>
+          <div class="unit-sep">:</div>
+          <div class="unit">
+            <span class="unit-value" id="minutes">00</span>
+            <span class="unit-label">Minutes</span>
+          </div>
+          <div class="unit-sep">:</div>
+          <div class="unit">
+            <span class="unit-value" id="seconds">00</span>
+            <span class="unit-label">Seconds</span>
+          </div>
+        </div>
+
+        <p class="target-label" id="target-label"></p>
+
+        <div class="progress-bar">
+          <div class="progress-fill" id="progress-fill"></div>
+        </div>
+
+        <button class="reset-btn" onclick="resetCountdown()">Set New Countdown</button>
+      </div>
+
+      <!-- Expired Card -->
+      <div class="card expired-card hidden" id="expired-card">
+        <div class="expired-emoji">🎉</div>
+        <h2 id="expired-title"></h2>
+        <p>Your countdown has ended!</p>
+        <button class="btn" onclick="resetCountdown()">Set New Countdown</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="confetti-container" id="confetti-container"></div>
+  <script src="script.js"></script>
+</body>
+</html>

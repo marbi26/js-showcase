@@ -1,0 +1,192 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #0f0f0f;
+  color: #f0f0f0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 20px;
+}
+
+.container {
+  width: 100%;
+  max-width: 580px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+header { display: flex; flex-direction: column; gap: 8px; }
+
+.back { color: #f0c040; text-decoration: none; font-size: 0.85rem; }
+.back:hover { text-decoration: underline; }
+
+header h1 { font-size: 1.8rem; }
+.hidden { display: none !important; }
+
+.card {
+  background: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  border-radius: 16px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.card h2 { font-size: 1.1rem; color: #aaa; }
+
+.form-group { display: flex; flex-direction: column; gap: 7px; }
+.form-group label { font-size: 0.85rem; color: #aaa; }
+.form-group input {
+  background: #111;
+  border: 1px solid #333;
+  border-radius: 8px;
+  padding: 11px 14px;
+  color: #f0f0f0;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border 0.2s;
+  width: 100%;
+}
+.form-group input:focus { border-color: #f0c040; }
+input[type="datetime-local"]::-webkit-calendar-picker-indicator { filter: invert(1); cursor: pointer; }
+
+.error { color: #f44336; font-size: 0.85rem; }
+
+.btn {
+  padding: 12px 28px;
+  background: #f0c040;
+  color: #000;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: background 0.2s;
+  align-self: flex-start;
+}
+.btn:hover { background: #e0b030; }
+
+.presets { display: flex; flex-direction: column; gap: 10px; }
+.presets p { font-size: 0.85rem; color: #555; }
+.preset-row { display: flex; gap: 10px; flex-wrap: wrap; }
+.preset-btn {
+  background: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  color: #aaa;
+  padding: 8px 16px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.2s;
+}
+.preset-btn:hover { border-color: #f0c040; color: #f0c040; }
+
+.countdown-card { align-items: center; text-align: center; gap: 24px; }
+.event-label { font-size: 1.2rem; font-weight: 600; color: #f0f0f0; }
+
+.units {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.unit { display: flex; flex-direction: column; align-items: center; gap: 6px; min-width: 80px; }
+
+.unit-value {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #f0c040;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  display: inline-block;
+}
+
+.unit-value.tick { animation: tickBounce 0.15s ease-out; }
+@keyframes tickBounce {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.12); }
+  100% { transform: scale(1); }
+}
+
+.unit-value.counting-up { animation: countRoll 0.08s steps(1) infinite; }
+@keyframes countRoll {
+  0%   { opacity: 1; }
+  50%  { opacity: 0.6; }
+  100% { opacity: 1; }
+}
+
+.unit-label { font-size: 0.75rem; color: #555; text-transform: uppercase; letter-spacing: 0.08em; }
+.unit-sep { font-size: 2.5rem; color: #333; font-weight: 300; padding-bottom: 18px; }
+.target-label { font-size: 0.85rem; color: #555; }
+
+.progress-bar { width: 100%; height: 5px; background: #2a2a2a; border-radius: 999px; overflow: hidden; }
+.progress-fill {
+  height: 100%;
+  background: #f0c040;
+  border-radius: 999px;
+  width: 0%;
+  transition: width 1s linear;
+}
+
+.reset-btn {
+  background: none;
+  border: 1px solid #333;
+  color: #aaa;
+  padding: 9px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.2s;
+}
+.reset-btn:hover { border-color: #f0c040; color: #f0c040; }
+
+.expired-card { align-items: center; text-align: center; }
+
+.expired-emoji {
+  font-size: 3.5rem;
+  animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+@keyframes popIn {
+  0%   { transform: scale(0); opacity: 0; }
+  70%  { transform: scale(1.2); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.expired-card h2 { font-size: 1.5rem; animation: slideUp 0.4s ease 0.1s both; }
+.expired-card p  { color: #aaa; font-size: 0.9rem; animation: slideUp 0.4s ease 0.2s both; }
+.expired-card .btn { animation: slideUp 0.4s ease 0.3s both; }
+
+@keyframes slideUp {
+  from { transform: translateY(16px); opacity: 0; }
+  to   { transform: translateY(0);   opacity: 1; }
+}
+
+.confetti-container {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 999;
+}
+
+.confetti-piece {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  top: -10px;
+  border-radius: 2px;
+  animation: confettiFall linear forwards;
+}
+
+@keyframes confettiFall {
+  0%   { transform: translateY(0) rotate(0deg) translateX(0); opacity: 1; }
+  80%  { opacity: 1; }
+  100% { transform: translateY(100vh) rotate(720deg) translateX(var(--drift)); opacity: 0; }
+}
