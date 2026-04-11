@@ -1,0 +1,257 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #0f0f0f;
+  color: #f0f0f0;
+  min-height: 100vh;
+  padding: 24px 20px;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Header */
+header {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.back {
+  color: #f0c040;
+  text-decoration: none;
+  font-size: 0.85rem;
+}
+
+.back:hover { text-decoration: underline; }
+
+header h1 { font-size: 1.8rem; }
+
+header p {
+  color: #555;
+  font-size: 0.9rem;
+}
+
+.hidden { display: none; }
+
+/* Filter Buttons */
+.filters {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  background: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  color: #aaa;
+  padding: 8px 20px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  transition: all 0.2s;
+}
+
+.filter-btn:hover {
+  border-color: #f0c040;
+  color: #f0c040;
+}
+
+.filter-btn.active {
+  background: #2a2510;
+  border-color: #f0c040;
+  color: #f0c040;
+  font-weight: 600;
+}
+
+/* Gallery Grid */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+/* Gallery Item */
+.gallery-item {
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+  aspect-ratio: 4 / 3;
+  background: #1a1a1a;
+  transition: transform 0.25s, opacity 0.3s;
+}
+
+.gallery-item:hover { transform: scale(1.03); }
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: filter 0.25s;
+}
+
+.gallery-item:hover img { filter: brightness(0.75); }
+
+/* Overlay on hover */
+.gallery-item .overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 14px;
+  background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.25s;
+}
+
+.gallery-item:hover .overlay { opacity: 1; }
+
+.overlay .img-title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.overlay .img-category {
+  font-size: 0.75rem;
+  color: #ccc;
+  margin-top: 2px;
+}
+
+/* Filter animation */
+.gallery-item.hide {
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.95);
+}
+
+/* Empty */
+.empty {
+  text-align: center;
+  color: #555;
+  padding: 40px 0;
+  font-size: 0.9rem;
+}
+
+/* ── Lightbox ───────────────────────────── */
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lightbox.hidden { display: none; }
+
+.lb-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.9);
+}
+
+.lb-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  max-width: 90vw;
+  max-height: 90vh;
+}
+
+.lb-content img {
+  max-width: 100%;
+  max-height: 78vh;
+  border-radius: 10px;
+  object-fit: contain;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.6);
+}
+
+.lb-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0 4px;
+}
+
+#lb-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #f0f0f0;
+}
+
+#lb-counter {
+  font-size: 0.8rem;
+  color: #666;
+}
+
+/* Close button */
+.lb-close {
+  position: fixed;
+  top: 20px;
+  right: 24px;
+  z-index: 2;
+  background: #1a1a1a;
+  border: 1px solid #333;
+  color: #aaa;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.lb-close:hover { background: #f44336; color: #fff; border-color: #f44336; }
+
+/* Prev / Next */
+.lb-prev,
+.lb-next {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid #333;
+  color: #aaa;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.lb-prev { left: 20px; }
+.lb-next { right: 20px; }
+
+.lb-prev:hover,
+.lb-next:hover {
+  background: #f0c040;
+  color: #000;
+  border-color: #f0c040;
+}

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Image Gallery</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="container">
+
+    <header>
+      <a href="../../index.html" class="back">← Back to Showcase</a>
+      <h1>🖼️ Image Gallery</h1>
+      <p>Click any image to open it. Use arrow keys to browse.</p>
+    </header>
+
+    <!-- Filter Buttons -->
+    <div class="filters" id="filters">
+      <button class="filter-btn active" onclick="filterGallery('all',   this)">All</button>
+      <button class="filter-btn"        onclick="filterGallery('nature',this)">🌿 Nature</button>
+      <button class="filter-btn"        onclick="filterGallery('city',  this)">🏙️ City</button>
+      <button class="filter-btn"        onclick="filterGallery('tech',  this)">💻 Tech</button>
+    </div>
+
+    <!-- Gallery Grid -->
+    <div class="gallery" id="gallery"></div>
+
+    <!-- No results -->
+    <p class="empty hidden" id="empty">No images in this category.</p>
+
+  </div>
+
+  <!-- Lightbox -->
+  <div class="lightbox hidden" id="lightbox">
+    <button class="lb-close"  onclick="closeLightbox()">✕</button>
+    <button class="lb-prev"   onclick="navigate(-1)">&#8592;</button>
+    <button class="lb-next"   onclick="navigate(1)">&#8594;</button>
+    <div class="lb-content">
+      <img id="lb-img" src="" alt="" />
+      <div class="lb-info">
+        <span id="lb-title"></span>
+        <span id="lb-counter"></span>
+      </div>
+    </div>
+    <div class="lb-backdrop" onclick="closeLightbox()"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
